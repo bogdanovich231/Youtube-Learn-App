@@ -1,10 +1,9 @@
 {
   "expo": {
-    "name": "real-time-chat",
-    "slug": "real-time-chat",
+    "name": "youtube-learn",
+    "slug": "youtube-learn",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {

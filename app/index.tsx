@@ -1,17 +1,22 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import { Logo } from "../components/logo/Logo";
-import { CustomButton } from "../components/button/CustomButton";
+import React, { Image, StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
+import { Logo } from "../src/components/logo/Logo";
+import { CustomButton } from "../src/components/button/CustomButton";
 
-export const HomeScreen = () => {
+const HomeScreen = () => {
+  const handleGuestLogin = () => {
+    router.replace("/(tabs)");
+  };
+
   return (
     <View style={styles.container}>
       <Logo />
       <View>
-        <Image source={require("../../assets/app-icon.png")} />
+        <Image source={require("../assets/app-icon.png")} />
       </View>
       <View style={styles.bottomContent}>
         <Text style={styles.title}>Welcome to the best YouTube-based learning application.</Text>
-        <CustomButton style={styles.buttonStyle} title={"Log in as guest"} onPress={() => console.log("press login")} />
+        <CustomButton style={styles.buttonStyle} title={"Log in as guest"} onPress={handleGuestLogin} />
 
         <Text style={styles.termsText}>
           By continuing you agree with {"\n"} <Text style={styles.link}>Terms and Conditions</Text> and{" "}
@@ -59,3 +64,5 @@ const styles = StyleSheet.create({
     color: "#2B2D42",
   },
 });
+
+export default HomeScreen;
