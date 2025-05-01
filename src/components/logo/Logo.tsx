@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
     width: "65%",
-    marginTop: 80,
     marginHorizontal: 51,
   },
   youtube: {
