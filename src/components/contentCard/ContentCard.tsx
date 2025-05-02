@@ -27,6 +27,8 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins-Bold",
     fontSize: 12,
     color: "#2B2D42",
+    marginTop: 16,
+    marginBottom: 12,
   },
   description: {
     fontFamily: "Poppins-Medium",

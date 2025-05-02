@@ -5,6 +5,7 @@ export interface IVideo {
   snippet: {
     publishedAt: string;
     description: string;
+    title?: string;
     thumbnails: {
       high: {
         url: string;
