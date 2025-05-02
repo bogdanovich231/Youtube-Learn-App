@@ -6,14 +6,15 @@ import { IVideo } from "~/utils/interfaces/VideoInterface";
 
 type CategoryListProps = {
   onPress: () => void;
+  category?: string;
 };
 
-export const CategoryList = ({ onPress }: CategoryListProps) => {
+export const CategoryList = ({ onPress, category }: CategoryListProps) => {
   const [videos, setVideos] = useState<IVideo[]>([]);
 
   useEffect(() => {
     const loadVideos = async () => {
-      const fetchedVideos = await searchVideos("React Native");
+      const fetchedVideos = await searchVideos(category || "");
       setVideos(fetchedVideos);
     };
     loadVideos();
@@ -22,7 +23,7 @@ export const CategoryList = ({ onPress }: CategoryListProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.contentTitle}>
-        <Text style={styles.title}>React Native</Text>
+        <Text style={styles.title}>{category}</Text>
         <TouchableOpacity onPress={onPress}>
           <Text style={styles.moreText}>Show more</Text>
         </TouchableOpacity>
@@ -52,7 +53,11 @@ export const CategoryList = ({ onPress }: CategoryListProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 34,
+    borderBottomColor: "#2B2D42",
+    borderBottomWidth: 2,
+    borderStyle: "solid",
+    marginTop: 8,
+    paddingBottom: 24,
   },
   title: {
     fontFamily: "Poppins-SemiBold",

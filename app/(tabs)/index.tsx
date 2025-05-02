@@ -1,11 +1,13 @@
-import React, { Text } from "react-native";
+import React, { ScrollView } from "react-native";
 import { CategoryList } from "~/components/categoryList/CategoryList";
 
 const MainScreen = () => {
   return (
-    <Text>
-      <CategoryList onPress={() => console.log("Show more")} />
-    </Text>
+    <ScrollView>
+      <CategoryList onPress={() => console.log("Show more")} category={"React Native"} />
+      <CategoryList onPress={() => console.log("Show more")} category={"React"} />
+      <CategoryList onPress={() => console.log("Show more")} category={"Typescript"} />
+    </ScrollView>
   );
 };
 
