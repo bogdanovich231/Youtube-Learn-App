@@ -6,6 +6,7 @@ export interface IVideo {
     publishedAt: string;
     description: string;
     title?: string;
+    channelTitle?: string;
     thumbnails: {
       high: {
         url: string;

@@ -1,12 +1,13 @@
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
+import { Text } from "react-native";
+import { UserName } from "~/components/userName/UserName.tsx";
 import { VideoDetails } from "~/components/videoDetails/VideoDetails.tsx";
 import { getVideoDetails } from "~/utils/api/VideoApi";
 import { IVideo } from "~/utils/interfaces/VideoInterface";
 
 const VideoScreen = () => {
   const { id } = useLocalSearchParams();
-
   const [videoData, setVideoData] = useState<IVideo | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,8 +27,14 @@ const VideoScreen = () => {
 
     fetchVideoDetails();
   }, [id]);
+
+  if (!videoData) {
+    return <Text>Video not found</Text>;
+  }
+
   return (
-    videoData && (
+    <>
+      <UserName userName={videoData.snippet.channelTitle || "User Name"} />
       <VideoDetails
         description={videoData.snippet.description}
         count={{
@@ -35,7 +42,7 @@ const VideoScreen = () => {
           likes: Number(videoData.statistics.likeCount),
         }}
       />
-    )
+    </>
   );
 };
 
