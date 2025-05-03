@@ -30,6 +30,14 @@ export default function RootLayout() {
           animation: "none",
         }}
       />
+      <Stack.Screen
+        name="details/[id]"
+        options={{
+          headerShown: false,
+          gestureEnabled: false,
+          animation: "none",
+        }}
+      />
     </Stack>
   );
 }
