@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import React, { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ContentCard } from "~/components/contentCard/ContentCard";
@@ -14,6 +14,7 @@ const SearchScreen = () => {
   const [error, setError] = useState<string | null>(null);
   const [sortModalVisible, setSortModalVisible] = useState(false);
   const [currentSort, setCurrentSort] = useState<"latest" | "oldest" | "popular">("popular");
+  const router = useRouter();
 
   const getSortLabel = () => {
     switch (currentSort) {
@@ -80,6 +81,7 @@ const SearchScreen = () => {
                 title={item.snippet.title}
                 description={item.snippet.description}
                 date={new Date(item.snippet.publishedAt).toLocaleString()}
+                onPress={() => router.push(`/details/${item.id.videoId}`)}
               />
             </View>
           )}
