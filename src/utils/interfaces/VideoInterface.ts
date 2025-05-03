@@ -12,4 +12,8 @@ export interface IVideo {
       };
     };
   };
+  statistics: {
+    viewCount: string;
+    likeCount: string;
+  };
 }

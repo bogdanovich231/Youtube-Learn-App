@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyAua9ckowCu9Y9oRpkSLq_SBX1CsoZtiKM";
+const API_KEY = "AIzaSyA60uYjIwlPr-jWXS1j7VMIzG8Y9-zcKCY";
 
 export const searchVideos = async (query: string, sort?: "latest" | "oldest" | "popular") => {
   try {
@@ -17,5 +17,27 @@ export const searchVideos = async (query: string, sort?: "latest" | "oldest" | "
   } catch (error) {
     console.error("Error request YouTube API:", error);
     return [];
+  }
+};
+
+export const getVideoDetails = async (id: string) => {
+  try {
+    const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${id}&key=${API_KEY}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch video details: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    if (data.items && data.items.length > 0) {
+      return data.items[0];
+    } else {
+      throw new Error("Video not found");
+    }
+  } catch (error) {
+    console.error("Error fetching video details:", error);
+    throw error;
   }
 };

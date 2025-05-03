@@ -3,6 +3,7 @@ import { ContentCard } from "../contentCard/ContentCard";
 import { useEffect, useState } from "react";
 import { searchVideos } from "~/utils/api/VideoApi";
 import { IVideo } from "~/utils/interfaces/VideoInterface";
+import { useRouter } from "expo-router";
 
 type CategoryListProps = {
   onPress: () => void;
@@ -11,6 +12,7 @@ type CategoryListProps = {
 
 export const CategoryList = ({ onPress, category }: CategoryListProps) => {
   const [videos, setVideos] = useState<IVideo[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     const loadVideos = async () => {
@@ -42,6 +44,7 @@ export const CategoryList = ({ onPress, category }: CategoryListProps) => {
                 image={item.snippet.thumbnails.high.url}
                 description={item.snippet.description}
                 date={new Date(item.snippet.publishedAt).toLocaleString()}
+                onPress={() => router.push(`/details/${item.id.videoId}`)}
               />
             </View>
           )}

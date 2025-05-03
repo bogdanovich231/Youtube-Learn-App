@@ -1,4 +1,4 @@
-import React, { Image, StyleSheet, Text, View } from "react-native";
+import React, { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type ContentCardProps = {
   image: string;
@@ -7,16 +7,19 @@ type ContentCardProps = {
   date: string;
   style?: object;
   styleContainer?: object;
+  onPress: () => void;
 };
 
-export const ContentCard = ({ image, title, description, date, style, styleContainer }: ContentCardProps) => {
+export const ContentCard = ({ image, title, description, date, style, styleContainer, onPress }: ContentCardProps) => {
   return (
-    <View style={styleContainer}>
-      <Image source={{ uri: image }} style={[styles.image, style]} />
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
-      <Text style={styles.date}>{date}</Text>
-    </View>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styleContainer}>
+        <Image source={{ uri: image }} style={[styles.image, style]} />
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.date}>{date}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({
