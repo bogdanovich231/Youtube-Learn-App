@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { UserName } from "~/components/userName/UserName.tsx";
 import { VideoDetails } from "~/components/videoDetails/VideoDetails.tsx";
+import { VideoPlayer } from "~/components/videoPlayer/VideoPlayer";
 import { getVideoDetails } from "~/utils/api/VideoApi";
 import { IVideo } from "~/utils/interfaces/VideoInterface";
 
@@ -34,38 +35,41 @@ const VideoScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <UserName userName={videoData.snippet.channelTitle || "User Name"} />
+    <>
+      <VideoPlayer uri={`https://www.youtube.com/watch?v=${videoData.id}`} />
+      <View style={styles.container}>
+        <UserName userName={videoData.snippet.channelTitle || "User Name"} />
 
-      <View style={styles.tabContainer}>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === "Details" && styles.activeTab]}
-          onPress={() => setActiveTab("Details")}
-        >
-          <Text style={[styles.tabText, activeTab === "Details" && styles.activeTabText]}>Details</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tab, activeTab === "Notes" && styles.activeTab]}
-          onPress={() => setActiveTab("Notes")}
-        >
-          <Text style={[styles.tabText, activeTab === "Notes" && styles.activeTabText]}>Notes</Text>
-        </TouchableOpacity>
-      </View>
-
-      {activeTab === "Details" ? (
-        <VideoDetails
-          description={videoData.snippet.description}
-          count={{
-            views: Number(videoData.statistics.viewCount),
-            likes: Number(videoData.statistics.likeCount),
-          }}
-        />
-      ) : (
-        <View style={styles.notesContainer}>
-          <Text style={styles.notesText}>Here notes about the video.</Text>
+        <View style={styles.tabContainer}>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === "Details" && styles.activeTab]}
+            onPress={() => setActiveTab("Details")}
+          >
+            <Text style={[styles.tabText, activeTab === "Details" && styles.activeTabText]}>Details</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === "Notes" && styles.activeTab]}
+            onPress={() => setActiveTab("Notes")}
+          >
+            <Text style={[styles.tabText, activeTab === "Notes" && styles.activeTabText]}>Notes</Text>
+          </TouchableOpacity>
         </View>
-      )}
-    </View>
+
+        {activeTab === "Details" ? (
+          <VideoDetails
+            description={videoData.snippet.description}
+            count={{
+              views: Number(videoData.statistics.viewCount),
+              likes: Number(videoData.statistics.likeCount),
+            }}
+          />
+        ) : (
+          <View style={styles.notesContainer}>
+            <Text style={styles.notesText}>Here notes about the video.</Text>
+          </View>
+        )}
+      </View>
+    </>
   );
 };
 
